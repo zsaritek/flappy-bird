@@ -15,6 +15,7 @@ class Game {
         this.gameIsOver = false;
         this.score = 0;
         this.obstacles = [];
+        this.gameOverSound = new Audio("../audio/game_over.mp3")
     }
 
     start() {
@@ -22,7 +23,7 @@ class Game {
         this.gameScreen.style.width = `${this.width}px`;
         this.startScreen.style.display = "none";
         this.gameScreen.style.display = "block";
-
+        this.player.playAudio.play();
         this.gameLoop();
     }
 
@@ -78,7 +79,12 @@ class Game {
 
     endGame() {
         this.gameIsOver = true;
+        this.player.playAudio.pause();
+
+        this.gameOverSound.play();
         this.player.element.remove();
+        this.player.playAudio.remove();
+
         this.obstacles.forEach(function (obstacle) {
             obstacle.topElement.remove();
             obstacle.bottomElement.remove();

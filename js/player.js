@@ -15,7 +15,13 @@ class Player {
         this.element.style.left = `${left}px`;
         this.element.style.top = `${top}px`;
 
+        this.playAudio = document.createElement("audio");
+        this.playAudio.id = 'playAudio';
+        this.playAudio.src = '../audio/game_play.mp3';
+        this.playAudio.loop = true;
+
         this.gameScreen.appendChild(this.element);
+        this.gameScreen.appendChild(this.playAudio);
     }
     jump() {
         this.gravitySpeed = -2; // Adjust this value to control the jump height vertically-the positive y-direction is downwards,
