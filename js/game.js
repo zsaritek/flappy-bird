@@ -3,6 +3,7 @@ class Game {
         this.startScreen = document.querySelector("#game-intro");
         this.gameScreen = document.querySelector("#game-screen");
         this.gameEndScreen = document.querySelector("#game-end");
+        this.gameScore = document.querySelector("#scoreDisplay");
         this.height = 800;
         this.width = 1500;
 
@@ -38,8 +39,7 @@ class Game {
     update() {
         this.player.updatePosition();
 
-        let minHeight = this.height - 80; //max space from map top
-        if (this.player.top > minHeight) {
+        if (this.player.top > this.height) {
             this.endGame()
         }
 
@@ -55,6 +55,9 @@ class Game {
                 this.obstacles.splice(i, 1);
                 // Update the counter variable to account for the removed obstacle
                 i--;
+
+                this.score++;
+                this.updateScoreDisplay(`+${this.score}`);
             }
 
             if (this.player.didCollide(obstacle.topElement)) {
@@ -77,6 +80,11 @@ class Game {
         }
     }
 
+    updateScoreDisplay(text) {
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        scoreDisplay.textContent = text;
+    }
+
     endGame() {
         this.gameIsOver = true;
         this.player.playAudio.pause();
@@ -93,7 +101,9 @@ class Game {
         this.gameScreen.style.display = "none";
         // Show end game screen
         this.gameEndScreen.style.display = "block";
+        // show score
+        this.gameScore.textContent = `Score: ${this.score * 5}`;
     }
 
-    //https://tenor.com/view/flappy-bird-gif-25698881 
+
 }

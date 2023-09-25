@@ -24,7 +24,7 @@ class Player {
         this.gameScreen.appendChild(this.playAudio);
     }
     jump() {
-        this.gravitySpeed = -2; // Adjust this value to control the jump height vertically-the positive y-direction is downwards,
+        this.gravitySpeed = -3; // Adjust this value to control the jump height vertically-the positive y-direction is downwards,
         // so a negative value in the y - component represents an upward movement.
     }
     didCollide(obstacle) {
